@@ -6,6 +6,7 @@ namespace Tests\Innmind\Async\OperatingSystem;
 use Innmind\Async\OperatingSystem\Factory;
 use Innmind\OperatingSystem\Factory as Sync;
 use Innmind\Filesystem\Name;
+use Innmind\TimeContinuum\Earth\Period\Second;
 use Innmind\Url\Path;
 use Innmind\Mantle\{
     Forerunner,
@@ -69,5 +70,29 @@ class FunctionalTest extends TestCase
         ));
 
         $this->assertSame(6645, $total);
+    }
+
+    public function testAsyncHalt()
+    {
+        $secondFinishedFirst = null;
+        $forerunner = Forerunner::of($this->synchronous->clock());
+        $forerunner(null, Predetermined::of(
+            function($suspend) use (&$secondFinishedFirst) {
+                $this
+                    ->factory
+                    ->build($suspend)
+                    ->process()
+                    ->halt(new Second(2));
+                $this->assertTrue($secondFinishedFirst);
+            },
+            function($suspend) use (&$secondFinishedFirst) {
+                $this
+                    ->factory
+                    ->build($suspend)
+                    ->process()
+                    ->halt(new Second(1));
+                $secondFinishedFirst = true;
+            },
+        ));
     }
 }

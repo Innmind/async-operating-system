@@ -20,17 +20,11 @@ final class Factory
         $this->config = $config;
     }
 
-    /**
-     * @psalm-suppress PossiblyUnusedMethod
-     */
     public static function of(OperatingSystem $synchronous, Config $config = null): self
     {
         return new self($synchronous, $config);
     }
 
-    /**
-     * @psalm-suppress PossiblyUnusedMethod
-     */
     public function build(Suspend $suspend): OperatingSystem
     {
         return Async::of(

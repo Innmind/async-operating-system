@@ -38,7 +38,7 @@ class FunctionalTest extends TestCase
                     ->build($suspend)
                     ->filesystem()
                     ->mount(Path::of('./'))
-                    ->get(Name::of('composer.lock'))
+                    ->get(Name::of('LICENSE'))
                     ->match(
                         static fn($file) => $file,
                         static fn() => throw new \LogicException('file not found'),
@@ -56,7 +56,7 @@ class FunctionalTest extends TestCase
                     ->build($suspend)
                     ->filesystem()
                     ->mount(Path::of('./'))
-                    ->get(Name::of('composer.json'))
+                    ->get(Name::of('phpunit.xml.dist'))
                     ->match(
                         static fn($file) => $file,
                         static fn() => throw new \LogicException('file not found'),
@@ -70,7 +70,7 @@ class FunctionalTest extends TestCase
             },
         ));
 
-        $this->assertSame(6645, $total);
+        $this->assertSame(40, $total);
     }
 
     public function testAsyncHalt()

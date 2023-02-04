@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
         php-version: ['8.1', '8.2']
         dependencies: ['lowest', 'highest']
     name: 'PHPUnit'

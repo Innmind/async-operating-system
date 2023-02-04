@@ -7,7 +7,7 @@ use Innmind\Async\OperatingSystem\Factory;
 use Innmind\OperatingSystem\Factory as Sync;
 use Innmind\Filesystem\Name;
 use Innmind\TimeContinuum\Earth\Period\Second;
-use Innmind\Server\Status\Server\Process\Pid;
+use Innmind\Server\Control\Server\Command;
 use Innmind\Url\Path;
 use Innmind\Mantle\{
     Forerunner,
@@ -97,7 +97,7 @@ class FunctionalTest extends TestCase
         ));
     }
 
-    public function testAsyncServerStatus()
+    public function testAsyncServerControl()
     {
         $secondFinishedFirst = null;
         $forerunner = Forerunner::of($this->synchronous->clock());
@@ -106,23 +106,20 @@ class FunctionalTest extends TestCase
                 $this
                     ->factory
                     ->build($suspend)
-                    ->status()
+                    ->control()
                     ->processes()
-                    ->all()
-                    ->foreach(static fn() => null); // force unwrap
+                    ->execute(Command::foreground('sleep 2'))
+                    ->wait();
                 $this->assertTrue($secondFinishedFirst);
             },
             function($suspend) use (&$secondFinishedFirst) {
                 $this
                     ->factory
                     ->build($suspend)
-                    ->status()
+                    ->control()
                     ->processes()
-                    ->get(new Pid(1))
-                    ->match(
-                        static fn() => null, // force unwrap
-                        static fn() => null,
-                    );
+                    ->execute(Command::foreground('sleep 1'))
+                    ->wait();
                 $secondFinishedFirst = true;
             },
         ));

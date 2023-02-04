@@ -18,7 +18,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl, random
+          extensions: mbstring, intl
           coverage: none
       - name: Composer
         uses: "ramsey/composer-install@v2"
@@ -43,7 +43,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl, random
+          extensions: mbstring, intl
           coverage: xdebug
       - name: Composer
         uses: "ramsey/composer-install@v2"
@@ -70,7 +70,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl, random
+          extensions: mbstring, intl
       - name: Composer
         uses: "ramsey/composer-install@v2"
         with:
@@ -90,7 +90,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl, random
+          extensions: mbstring, intl
       - name: Composer
         uses: "ramsey/composer-install@v2"
       - name: CS

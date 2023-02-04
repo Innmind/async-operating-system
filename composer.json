@@ -36,7 +36,6 @@
         "phpunit/phpunit": "~9.0",
         "vimeo/psalm": "~5.6",
         "innmind/black-box": "~4.10",
-        "innmind/coding-standard": "~2.0",
-        "ext-random": "*"
+        "innmind/coding-standard": "~2.0"
     }
 }

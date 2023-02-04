@@ -14,7 +14,7 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
-    <enableExtensions>
+    <disableExtensions>
         <extension name="random" />
-    </enableExtensions>
+    </disableExtensions>
 </psalm>

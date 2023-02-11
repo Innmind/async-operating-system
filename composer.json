@@ -15,7 +15,13 @@
         "issues": "http://github.com/innmind/async-operating-system/issues"
     },
     "require": {
-        "php": "~8.1"
+        "php": "~8.1",
+        "innmind/mantle": "~1.0",
+        "innmind/async-time-warp": "~1.0",
+        "innmind/async-stream": "~1.0",
+        "innmind/async-socket": "~1.0",
+        "innmind/operating-system": "^3.5",
+        "innmind/http-transport": "~6.4"
     },
     "autoload": {
         "psr-4": {
@@ -29,7 +35,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
-        "vimeo/psalm": "~4.30",
+        "vimeo/psalm": "~5.6",
         "innmind/black-box": "~4.10",
         "innmind/coding-standard": "~2.0"
     }

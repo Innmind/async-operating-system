@@ -5,7 +5,10 @@ namespace Innmind\Async\OperatingSystem\Remote;
 
 use Innmind\Async\Socket\Client\Async as Client;
 use Innmind\OperatingSystem\Remote;
-use Innmind\TimeContinuum\Clock;
+use Innmind\TimeContinuum\{
+    Clock,
+    Earth\ElapsedPeriod,
+};
 use Innmind\Server\Control\{
     Server,
     Servers,
@@ -94,7 +97,7 @@ final class Async implements Remote
             $this->clock,
             new Chunk,
             $this->capabilities,
-        );
+        )->heartbeat(ElapsedPeriod::of(0), $this->suspend);
     }
 
     public function sql(Url $server): Connection

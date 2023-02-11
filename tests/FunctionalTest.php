@@ -8,7 +8,15 @@ use Innmind\OperatingSystem\Factory as Sync;
 use Innmind\Filesystem\Name;
 use Innmind\TimeContinuum\Earth\Period\Second;
 use Innmind\Server\Control\Server\Command;
-use Innmind\Url\Path;
+use Innmind\Url\{
+    Url,
+    Path,
+};
+use Innmind\Http\{
+    Message\Request\Request,
+    Message\Method,
+    ProtocolVersion,
+};
 use Innmind\Mantle\{
     Forerunner,
     Source\Predetermined,
@@ -123,5 +131,56 @@ class FunctionalTest extends TestCase
                 $secondFinishedFirst = true;
             },
         ));
+    }
+
+    public function testAsyncHttpCall()
+    {
+        $queue = new \SplQueue;
+        $forerunner = Forerunner::of($this->synchronous->clock());
+        $forerunner(null, Predetermined::of(
+            function($suspend) use ($queue) {
+                $queue->push('first started');
+
+                $this
+                    ->factory
+                    ->build($suspend)
+                    ->remote()
+                    ->http()(new Request(
+                        Url::of('https://github.com'),
+                        Method::get,
+                        ProtocolVersion::v11,
+                    ))
+                    ->match(
+                        static fn() => null,
+                        static fn() => null,
+                    );
+
+                $queue->push('first finished');
+            },
+            function($suspend) use ($queue) {
+                $queue->push('second started');
+
+                $this
+                    ->factory
+                    ->build($suspend)
+                    ->remote()
+                    ->http()(new Request(
+                        Url::of('https://github.com'),
+                        Method::get,
+                        ProtocolVersion::v11,
+                    ))
+                    ->match(
+                        static fn() => null,
+                        static fn() => null,
+                    );
+
+                $queue->push('second finished');
+            },
+        ));
+
+        $this->assertSame(
+            ['first started', 'second started', 'first finished', 'second finished'],
+            \iterator_to_array($queue),
+        );
     }
 }

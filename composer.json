@@ -20,7 +20,8 @@
         "innmind/async-time-warp": "~1.0",
         "innmind/async-stream": "~1.0",
         "innmind/async-socket": "~1.0",
-        "innmind/operating-system": "^3.5"
+        "innmind/operating-system": "^3.5",
+        "innmind/http-transport": "~6.4"
     },
     "autoload": {
         "psr-4": {

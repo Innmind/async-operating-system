@@ -9,7 +9,7 @@ use Innmind\OperatingSystem\{
 };
 use Innmind\Filesystem\Adapter;
 use Innmind\Server\Control\Server\Processes;
-use Innmind\Async\TimeWarp\Suspend as Halt;
+use Innmind\Async\TimeWarp\Halt;
 use Innmind\Stream\Capabilities;
 use Innmind\Url\Path;
 use Innmind\FileWatch\{

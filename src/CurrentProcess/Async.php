@@ -9,7 +9,7 @@ use Innmind\OperatingSystem\{
     CurrentProcess\Children,
     CurrentProcess\Signals,
 };
-use Innmind\Async\TimeWarp\Suspend as Halt;
+use Innmind\Async\TimeWarp\Halt;
 use Innmind\TimeContinuum\Period;
 use Innmind\Server\Control\Server\Process\Pid;
 use Innmind\Server\Status\Server\Memory\Bytes;

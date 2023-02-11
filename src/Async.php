@@ -32,7 +32,7 @@ use Innmind\Stream\{
 };
 use Innmind\Mantle\Suspend;
 use Innmind\Async\Stream\Streams as AsyncStreams;
-use Innmind\Async\TimeWarp\Suspend as Halt;
+use Innmind\Async\TimeWarp\Halt;
 
 final class Async implements OperatingSystem
 {

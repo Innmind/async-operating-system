@@ -178,9 +178,12 @@ class FunctionalTest extends TestCase
             },
         ));
 
-        $this->assertSame(
-            ['first started', 'second started', 'first finished', 'second finished'],
-            \iterator_to_array($queue),
-        );
+        $this->assertCount(4, $queue);
+        $this->assertSame('first started', $queue[0]);
+        $this->assertSame('second started', $queue[1]);
+        // the order it finished can't be determined as it depends on the speed
+        // of the http call
+        $this->assertContains('first finished', $queue);
+        $this->assertContains('second finished', $queue);
     }
 }

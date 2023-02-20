@@ -10,6 +10,8 @@ Async implementation of [`innmind/operating-system`](https://packagist.org/packa
 - Process forking
 - Handling signals
 
+**Note**: SQL connections are not async yet.
+
 ## Installation
 
 ```sh
